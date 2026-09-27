@@ -8,6 +8,7 @@ const ACCELERATION := 20.0
 const COAST_DECELERATION := 9.0
 const BRAKE_DECELERATION := 34.0
 const MAX_X := 7.2
+const BikeModelScene = preload("res://assets/bikes/bike-2/Bike3.glb")
 
 var speed := 0.0
 var steering := 0.0
@@ -141,3 +142,11 @@ func _build_visual() -> void:
 	visual.add_child(_box(Vector3(0.42,0.26,0.08),Vector3(-0.95,1.70,-1.40),dark))
 	visual.add_child(_box(Vector3(0.42,0.26,0.08),Vector3(0.95,1.70,-1.40),dark))
 	visual.add_child(_box(Vector3(0.48,0.20,0.12),Vector3(0,1.46,-1.22),dark))
+	for child: Node in visual.get_children():
+		if child is MeshInstance3D:
+			child.visible = false
+	var imported_model: Node3D = BikeModelScene.instantiate()
+	imported_model.name = "Bike3Model"
+	imported_model.position = Vector3.ZERO
+	imported_model.scale = Vector3(0.01, 0.01, 0.01)
+	visual.add_child(imported_model)

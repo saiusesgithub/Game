@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b37not8u8ybkm"]
+
+[ext_resource type="PackedScene" uid="uid://qqgmlgojsibq" path="res://assets/bikes/bike-1/New-Bike.glb" id="1_edvfl"]
+[ext_resource type="PackedScene" uid="uid://c5mc471atk0iy" path="res://assets/bikes/bike-2/Bike3.glb" id="2_cc3ye"]
+[ext_resource type="PackedScene" uid="uid://07h4qv3qnvw3" path="res://assets/bikes/bike-3/Fonk-Bike.glb" id="3_e5c8b"]
+
+[node name="AssetComparison" type="Node3D" unique_id=2131025679]
+
+[node name="Bike1" parent="." unique_id=694590221 instance=ExtResource("1_edvfl")]
+
+[node name="Bike2" parent="." unique_id=707152146 instance=ExtResource("2_cc3ye")]
+
+[node name="Bike3" parent="." unique_id=174762317 instance=ExtResource("3_e5c8b")]
