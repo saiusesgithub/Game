@@ -71,11 +71,10 @@ func _build_player() -> void:
 	add_child(player)
 	player.crashed.connect(_on_player_crashed)
 	camera = CameraScript.new()
-	camera.name = "ChaseCamera"
+	camera.name = "RiderCamera"
 	camera.player = player
 	camera.current = true
-	add_child(camera)
-	camera.global_position = Vector3(0, 4.6, 10.5)
+	player.add_child(camera)
 
 func _build_traffic_pool() -> void:
 	for i: int in range(14):
