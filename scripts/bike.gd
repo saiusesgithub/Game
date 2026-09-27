@@ -15,6 +15,7 @@ var steering := 0.0
 var active := true
 var distance_travelled := 0.0
 var visual: Node3D
+var steering_visual: Node3D
 
 func _ready() -> void:
 	collision_layer = 1
@@ -64,8 +65,13 @@ func _physics_process(delta: float) -> void:
 	global_position.x = clamp(global_position.x, -MAX_X, MAX_X)
 	distance_travelled += speed * delta
 
-	visual.rotation.z = lerp(visual.rotation.z, -steering * 0.43 * clamp(speed / 10.0, 0.0, 1.0), 9.0 * delta)
-	visual.rotation.y = lerp(visual.rotation.y, -steering * 0.10, 7.0 * delta)
+	var lean_amount: float = -steering * deg_to_rad(15.0) * clampf(speed / 10.0, 0.0, 1.0)
+	visual.rotation.z = lerpf(visual.rotation.z, lean_amount, 1.0 - exp(-9.0 * delta))
+	visual.rotation.y = lerpf(visual.rotation.y, -steering * deg_to_rad(4.0), 1.0 - exp(-7.0 * delta))
+	if steering_visual != null:
+		var speed_ratio: float = clampf(speed / MAX_SPEED, 0.0, 1.0)
+		var steering_limit: float = deg_to_rad(lerpf(15.0, 4.0, speed_ratio))
+		steering_visual.rotation.y = lerpf(steering_visual.rotation.y, -steering * steering_limit, 1.0 - exp(-10.0 * delta))
 	for index in get_slide_collision_count():
 		var hit := get_slide_collision(index).get_collider()
 		if hit != null and hit.is_in_group("traffic"):
@@ -151,3 +157,18 @@ func _build_visual() -> void:
 	imported_model.rotation_degrees = Vector3(0.0, 90.0, 0.0)
 	imported_model.scale = Vector3.ONE
 	visual.add_child(imported_model)
+	_create_steering_visual(imported_model)
+
+func _create_steering_visual(imported_model: Node3D) -> void:
+	steering_visual = Node3D.new()
+	steering_visual.name = "SteeringVisualRoot"
+	steering_visual.position = Vector3(1.679, 1.45, 0.0)
+	imported_model.add_child(steering_visual)
+	for child_name: String in ["Front", "Fork"]:
+		var assembly_part := imported_model.get_node_or_null(child_name) as Node3D
+		if assembly_part == null:
+			continue
+		var preserved_global_transform: Transform3D = assembly_part.global_transform
+		imported_model.remove_child(assembly_part)
+		steering_visual.add_child(assembly_part)
+		assembly_part.global_transform = preserved_global_transform
