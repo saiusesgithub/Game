@@ -122,7 +122,7 @@ func _wheel(position: Vector3) -> MeshInstance3D:
 
 func _build_visual() -> void:
 	visual = Node3D.new()
-	visual.name = "BikeVisual"
+	visual.name = "CockpitModelRoot"
 	add_child(visual)
 	var red := _make_material(Color(0.85, 0.06, 0.03), 0.25, 0.28)
 	var dark := _make_material(Color(0.06, 0.07, 0.08), 0.45, 0.35)
@@ -134,13 +134,10 @@ func _build_visual() -> void:
 	visual.add_child(_box(Vector3(0.60, 0.16, 0.62), Vector3(0.0, 1.13, 0.72), dark))
 	visual.add_child(_box(Vector3(0.12, 0.12, 0.92), Vector3(0.0, 0.73, -0.63), metal))
 	visual.add_child(_box(Vector3(1.02, 0.08, 0.10), Vector3(0.0, 1.42, -0.86), metal))
-	var cockpit := Node3D.new()
-	cockpit.name = "FirstPersonCockpit"
-	visual.add_child(cockpit)
-	cockpit.add_child(_box(Vector3(1.35,0.32,1.55),Vector3(0,0.94,-1.45),red))
-	cockpit.add_child(_box(Vector3(1.55,0.10,0.12),Vector3(0,1.38,-1.12),metal))
-	cockpit.add_child(_box(Vector3(0.42,0.12,0.16),Vector3(-0.92,1.40,-1.12),dark))
-	cockpit.add_child(_box(Vector3(0.42,0.12,0.16),Vector3(0.92,1.40,-1.12),dark))
-	cockpit.add_child(_box(Vector3(0.42,0.26,0.08),Vector3(-0.95,1.70,-1.40),dark))
-	cockpit.add_child(_box(Vector3(0.42,0.26,0.08),Vector3(0.95,1.70,-1.40),dark))
-	cockpit.add_child(_box(Vector3(0.48,0.20,0.12),Vector3(0,1.46,-1.22),dark))
+	visual.add_child(_box(Vector3(1.35,0.32,1.55),Vector3(0,0.94,-1.45),red))
+	visual.add_child(_box(Vector3(1.55,0.10,0.12),Vector3(0,1.38,-1.12),metal))
+	visual.add_child(_box(Vector3(0.42,0.12,0.16),Vector3(-0.92,1.40,-1.12),dark))
+	visual.add_child(_box(Vector3(0.42,0.12,0.16),Vector3(0.92,1.40,-1.12),dark))
+	visual.add_child(_box(Vector3(0.42,0.26,0.08),Vector3(-0.95,1.70,-1.40),dark))
+	visual.add_child(_box(Vector3(0.42,0.26,0.08),Vector3(0.95,1.70,-1.40),dark))
+	visual.add_child(_box(Vector3(0.48,0.20,0.12),Vector3(0,1.46,-1.22),dark))
