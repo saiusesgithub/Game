@@ -147,6 +147,7 @@ func _build_visual() -> void:
 			child.visible = false
 	var imported_model: Node3D = BikeModelScene.instantiate()
 	imported_model.name = "Bike3Model"
-	imported_model.position = Vector3.ZERO
-	imported_model.scale = Vector3(0.01, 0.01, 0.01)
+	imported_model.position = Vector3(0.0, -0.72, 0.0)
+	imported_model.rotation_degrees = Vector3(0.0, 90.0, 0.0)
+	imported_model.scale = Vector3.ONE
 	visual.add_child(imported_model)
