@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cjy0kw2vysver"]
+
+[ext_resource type="PackedScene" uid="uid://daa2g1icprx44" path="res://assets/bikes/bike-1/low-poly_motorcycle__2.glb" id="1_ce1r0"]
+[ext_resource type="PackedScene" uid="uid://xbybiq600dky" path="res://assets/bikes/bike-2/honda_africa_twin_low_poly__game_ready_3d_model.glb" id="2_ne5oo"]
+[ext_resource type="PackedScene" uid="uid://dhekax8klbx7y" path="res://assets/bikes/bike-3/suzuki_gsx-r750.glb" id="3_8ri2k"]
+
+[node name="NewAssetComparison" type="Node3D" unique_id=1163822506]
+
+[node name="NewBike1" parent="." unique_id=794542077 instance=ExtResource("1_ce1r0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="NewBike2" parent="." unique_id=1995284774 instance=ExtResource("2_ne5oo")]
+
+[node name="NewBike3" parent="." unique_id=2032801854 instance=ExtResource("3_8ri2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
