@@ -8,7 +8,7 @@ const ACCELERATION := 20.0
 const COAST_DECELERATION := 9.0
 const BRAKE_DECELERATION := 34.0
 const MAX_X := 7.2
-const BikeModelScene = preload("res://assets/bikes/bike-2/Bike3.glb")
+const BikeModelScene = preload("res://assets/bikes/bike-3/suzuki_gsx-r750.glb")
 
 var speed := 0.0
 var steering := 0.0
@@ -152,23 +152,12 @@ func _build_visual() -> void:
 		if child is MeshInstance3D:
 			child.visible = false
 	var imported_model: Node3D = BikeModelScene.instantiate()
-	imported_model.name = "Bike3Model"
-	imported_model.position = Vector3(0.0, -0.72, 0.0)
-	imported_model.rotation_degrees = Vector3(0.0, 90.0, 0.0)
+	imported_model.name = "SuzukiGsxR750"
+	imported_model.position = Vector3.ZERO
+	imported_model.rotation_degrees = Vector3(0.0, 180.0, 0.0)
 	imported_model.scale = Vector3.ONE
 	visual.add_child(imported_model)
-	_create_steering_visual(imported_model)
-
-func _create_steering_visual(imported_model: Node3D) -> void:
-	steering_visual = Node3D.new()
-	steering_visual.name = "SteeringVisualRoot"
-	steering_visual.position = Vector3(1.679, 1.45, 0.0)
-	imported_model.add_child(steering_visual)
-	for child_name: String in ["Front", "Fork"]:
-		var assembly_part := imported_model.get_node_or_null(child_name) as Node3D
-		if assembly_part == null:
-			continue
-		var preserved_global_transform: Transform3D = assembly_part.global_transform
-		imported_model.remove_child(assembly_part)
-		steering_visual.add_child(assembly_part)
-		assembly_part.global_transform = preserved_global_transform
+	steering_visual = imported_model.get_node_or_null("Sketchfab_model/2f7fffa1b5d34b2bad157f9b0db00e60_fbx/RootNode/bone_wheel_F_steer") as Node3D
+	var front_light_glow := imported_model.get_node_or_null("Sketchfab_model/2f7fffa1b5d34b2bad157f9b0db00e60_fbx/RootNode/lights_position_front_and_back/lights_position_front_and_back_glows/lights_position_front_and_back_glows_Material_004_0") as MeshInstance3D
+	if front_light_glow != null:
+		front_light_glow.visible = false
